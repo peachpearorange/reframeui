@@ -73,8 +73,6 @@
                       :overflow "auto"
                       :background "#222222"})
 
-
-
 (defn ui []
   [re/h-box :style fullscreenstyle
             :align :stretch
