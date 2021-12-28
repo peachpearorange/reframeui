@@ -18,8 +18,8 @@
                 :asset-path "/js/compiled"
                 :modules {:app {:init-fn reframeui.core/init}} ;; https://shadow-cljs.github.io/docs/UsersGuide.html#_modules
                 :devtools {:preloads [
-                                      ;; day8.re-frame-10x.preload
-                                      ;; re-frisk.preload
+                                      day8.re-frame-10x.preload
+                                      ;; re-frisk.preload ;; enable if you want it
                                       ]}
                 :dev {:compiler-options {:closure-defines {re-frame.trace.trace-enabled? true
                                                            day8.re-frame.tracing.trace-enabled? true

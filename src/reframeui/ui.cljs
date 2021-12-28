@@ -15,6 +15,7 @@
    [spade.util]
    [spade.core]
    [spade.runtime]
+   [re-frisk.clipboard]
    ;; [flow-storm.api :as fsa]
    ;; [odoyle-rules :as o]
 
@@ -93,6 +94,7 @@
                                :size "auto"
                                :align-self :end
                         ]
+
 
                        [:div {:style {
                                       :left             (+ 1.5 (get @(sub :mouse-position) 0))
