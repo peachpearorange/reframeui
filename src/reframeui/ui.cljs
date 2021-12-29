@@ -111,9 +111,10 @@
                                :align-self :end
                         ]
                        [re/box :child (re/progress-bar :style {:rotate (str (* (mod @(sub :time) 1000000) 0.0001) "turn")
-                                                               :left 200
-                                                               :top 200
-                                                               :position "absolute"}
+                                                               ;; :left 200
+                                                               ;; :top 200
+                                                               ;; :position "absolute"
+                                                               }
                                                        :model (js/Math.round (+ 50 (* 80 (js/Math.sin (* 0.001 (mod @(sub :time) 1000000))))))
                                                        :striped? true :width "300px")
                                :size "auto"
