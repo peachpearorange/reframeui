@@ -34,6 +34,10 @@
     (fn [db _]
       (update db :click-count inc)))
 
+;; (spade.core/defclass)
+;; (cljs.repl/find-doc "defclass")
+;; (cljs.repl/apropos "defclass")
+
   (rf/reg-sub
     ::clicks
     (fn [db _]
@@ -65,6 +69,18 @@
   (fn [db _]
     (:mouse-position db)))
 
+(rf/reg-event-db
+  :set-time
+  (fn [db [_ t]]
+    (assoc db :time t)))
+
+(rf/reg-sub
+  :time
+  (fn [db _]
+    (:time db)))
+
+(js/setInterval #(d :set-time (js/Date.now)) 100)
+
 (def fullscreenstyle {:position "fixed"
                       :top 0
                       :left 0
@@ -94,20 +110,29 @@
                                :size "auto"
                                :align-self :end
                         ]
-
-
-
-
-
-
+                       [re/box :child (re/progress-bar :style {:rotate (str (* (mod @(sub :time) 1000000) 0.0001) "turn")
+                                                               :left 200
+                                                               :top 200
+                                                               :position "absolute"}
+                                                       :model (js/Math.round (+ 50 (* 80 (js/Math.sin (* 0.001 (mod @(sub :time) 1000000))))))
+                                                       :striped? true :width "300px")
+                               :size "auto"
+                               :align-self :center
+                        ]
+                       [re/box :child (re/input-text :disabled? true) ;; [re/input-text :disabled? true]
+                               :size "auto"
+                               ;; :align-self :end
+                        ]
                        [:div {:style {
-                                      :left             (+ 1.5 (get @(sub :mouse-position) 0))
+                                      :left             (+ 6.5 (get @(sub :mouse-position) 0))
                                       :top              (get @(sub :mouse-position) 1)
                                       :width            50
                                       :height           50
                                       :background-color "black"
                                       :position         "absolute"}}]
                        ]])
+
+
 
 ;; shadow-cljs added an extra / to a line in the index.html which broke it... that's a bug...
 ;; compile with shadow-cljs release app
@@ -117,6 +142,8 @@
 (comment
 
   @re-frame.db/app-db
+  (js/Math.cos (/ (js/Date.now) 10000))
+
 
 (render-this [ui])
 
